@@ -1,0 +1,41 @@
+# ==============================================================================
+# Apache Server Configuration & Security Hardening — Veridon Technologies
+# ==============================================================================
+
+# Disable directory browsing
+Options -Indexes
+
+# Block direct access to hidden files and directories (e.g. .env, .git)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Apache 2.4+ alternative syntax for dotfile denial
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Block access to dependency & sensitive files
+<FilesMatch "(composer\.(json|lock)|\.env.*|\.git.*|README\.md|LICENSE)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Security Headers (if headers module is active)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Default Charset
+AddDefaultCharset UTF-8

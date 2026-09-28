@@ -1,0 +1,44 @@
+# ==============================================================================
+# Git Ignore Rules — Veridon Technologies Corporate Website
+# ==============================================================================
+
+# Environment & Sensitive Credentials
+.env
+.env.local
+.env.*.local
+
+# Composer Dependencies (Install via `composer install`)
+/vendor/
+composer.phar
+
+# Operating System Files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor & IDE Directories
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.claude/
+.gemini/
+
+# Server Logs & Temporary Files
+*.log
+error_log
+/logs/
+*.tmp
+*.bak
+*.swp
